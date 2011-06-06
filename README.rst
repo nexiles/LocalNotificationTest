@@ -4,7 +4,7 @@ Projekt: UILocalNotification Test
 
 :Author:  Stefan Eletzhofer
 :Date:    2011-06-06
-:Version: 0.1dev
+:Version: 0.1
 
 
 Abstract
@@ -20,9 +20,10 @@ http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Concept
 Changelog
 =========
 
-0.1 - unreleased
+0.1 - 2011-06-06
 ----------------
 
 - template code, readme
+- working example
 
 ..  vim: set ft=rst tw=75 nocin nosi ai sw=4 ts=4 expandtab:
