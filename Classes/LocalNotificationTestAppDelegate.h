@@ -18,5 +18,9 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet LocalNotificationTestViewController *viewController;
 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
+
+
 @end
 

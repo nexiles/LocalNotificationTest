@@ -9,20 +9,33 @@
 #import "LocalNotificationTestAppDelegate.h"
 #import "LocalNotificationTestViewController.h"
 
+static int dbg = 1;
+
 @implementation LocalNotificationTestAppDelegate
 
 @synthesize window;
 @synthesize viewController;
 
-
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
-    // Override point for customization after application launch.
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    DBGS;
+    NSString *message = [notification.userInfo objectForKey:@"message"];
+    application.applicationIconBadgeNumber = 0;
+    self.viewController.messageLabel.text = message;
+}
 
-	// Set the view controller as the window's root view controller and display.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    DBGS;
+
+    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+        [self application:application didReceiveLocalNotification:localNotif];
+    }
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
 
@@ -86,3 +99,4 @@
 
 
 @end
+// vim: set ts=4 sw=4 expandtab tw=78 : 

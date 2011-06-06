@@ -20,6 +20,7 @@ static int dbg = 1;
 
 @synthesize datePicker;
 @synthesize fireButton;
+@synthesize messageLabel;
 
 #pragma mark -
 #pragma mark Actions
@@ -27,7 +28,7 @@ static int dbg = 1;
 -(void)fireButtonPressed:(id)sender
 {
     DBG(@"sender=%@", sender);
-
+    self.messageLabel.text = nil;
     [self scheduleNotification];
 }
 
@@ -52,21 +53,26 @@ static int dbg = 1;
 
 - (void)scheduleNotification
 {
-    DBGS;
- 
+    NSDate *fireDate = self.datePicker.date;
+    DBG(@"fireDate=%@", fireDate);
+
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     if (localNotif == nil)
         return;
 
-    localNotif.fireDate = self.datePicker.date;
+    localNotif.fireDate = fireDate;
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
- 
+
     localNotif.alertBody = @"Alert!";
     localNotif.alertAction = NSLocalizedString(@"View Details", nil);
- 
+
     localNotif.soundName = UILocalNotificationDefaultSoundName;
-    localNotif.applicationIconBadgeNumber = 1;
- 
+    localNotif.applicationIconBadgeNumber = 1; // XXX: it's unclear to me how this should be calculated in advance.
+
+    localNotif.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSString stringWithFormat:@"Alert %@", localNotif.fireDate],
+            @"message", nil];
+
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     [localNotif release];
 }
@@ -78,7 +84,7 @@ static int dbg = 1;
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -92,4 +98,4 @@ static int dbg = 1;
 
 @end
 
-// vim: set ts=4 sw=4 expandtab tw=78 : 
+// vim: set ts=4 sw=4 expandtab tw=78 :

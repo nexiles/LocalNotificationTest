@@ -4,7 +4,7 @@ Projekt: UILocalNotification Test
 
 :Author:  Stefan Eletzhofer
 :Date:    2011-06-06
-:Version: 0.1
+:Version: 0.2dev
 
 
 Abstract
@@ -19,6 +19,11 @@ http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Concept
 
 Changelog
 =========
+
+0.2 - unreleased
+----------------
+
+- actually handle the notifications on app startup and/or local delivery.
 
 0.1 - 2011-06-06
 ----------------
